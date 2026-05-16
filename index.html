@@ -1,3 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>NOIR ÉTHER × JUN CHOI — OBLIVION</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm 12mm;
+            background-color: #0b0b0b;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #e5e5e5;
+            font-family: 'Times New Roman', Times, 'Noto Serif KR', serif;
+            letter-spacing: 0.05em;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* Utility classes for typography */
+        .brand-title {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 24pt;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-align: center;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .collection-title {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 42pt;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-align: center;
+            color: #9e8a78; /* Muted antique gold/earth tone */
+            text-transform: uppercase;
+            margin-top: 5mm;
+        }
+
+        .subtitle {
+            font-size: 10pt;
+            letter-spacing: 0.4em;
+            text-align: center;
+            color: #888888;
+            text-transform: uppercase;
+            margin-top: 3mm;
+        }
+
+        .divider {
+            width: 40mm;
+            height: 1px;
+            background-color: #444444;
+            margin: 12mm auto;
+        }
+
+        /* Section layout */
+        .container {
+            width: 100%;
+            padding: 10mm 5mm;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 15mm;
+            page-break-after: avoid;
+        }
+
+        .grid-table {
+            display: table;
+            width: 100%;
+            margin-bottom: 15mm;
+            border-collapse: collapse;
+        }
+
+        .grid-row {
+            display: table-row;
+        }
+
+        .grid-cell {
+            display: table-cell;
+            width: 50%;
+            vertical-align: top;
+            padding: 0 8mm;
+        }
+
+        .grid-cell.left-border {
+            border-left: 1px solid #2a2a2a;
+        }
+
+        .section-header {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14pt;
+            font-weight: 400;
+            color: #ffffff;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 6mm;
+            page-break-after: avoid;
+        }
+
+        .paragraph {
+            font-size: 10pt;
+            color: #b0b0b0;
+            text-align: justify;
+            margin-bottom: 5mm;
+        }
+
+        .paragraph.highlight {
+            color: #e5e5e5;
+            font-style: italic;
+        }
+
+        /* Quote design */
+        .quote-box {
+            background-color: #121212;
+            border-left: 3px solid #9e8a78;
+            padding: 6mm 8mm;
+            margin: 10mm 0;
+            page-break-inside: avoid;
+        }
+
+        .quote-text {
+            font-size: 10.5pt;
+            color: #dbdbdb;
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .quote-author {
+            font-size: 9pt;
+            color: #888888;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 3mm;
+            text-align: right;
+        }
+
+        /* Info specifications block */
+        .spec-table {
+            display: table;
+            width: 100%;
+            margin-top: 8mm;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .spec-row {
+            display: table-row;
+        }
+
+        .spec-label {
+            display: table-cell;
+            width: 30%;
+            font-size: 9pt;
+            color: #777777;
+            padding: 3mm 0;
+            border-bottom: 1px solid #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .spec-value {
+            display: table-cell;
+            width: 70%;
+            font-size: 9.5pt;
+            color: #cccccc;
+            padding: 3mm 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .footer {
+            margin-top: 20mm;
+            text-align: center;
+            font-size: 8pt;
+            color: #555555;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            page-break-inside: avoid;
+        }
+        
+        .math {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            color: #9e8a78;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header-section">
+            <div class="brand-title">Noir Éther</div>
+            <div class="collection-title">Oblivion</div>
+            <div class="subtitle">Autumn / Winter 2026 Collaboration</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- MAIN CONCEPT -->
+        <div class="grid-table">
+            <div class="grid-row">
+                <div class="grid-cell">
+                    <div class="section-header">The Concept</div>
+                    <p class="paragraph highlight">
+                        “인간의 살결을 구속하는 가장 완벽한 형태의 아름다움, 그 강박적 이면.”
+                    </p>
+                    <p class="paragraph">
+                        하이엔드 아방가르드 하우스 <strong>NOIR ÉTHER</strong>가 2026 파리 패션위크에서 선보일 메인 컬렉션, &lt;OBLIVION: 강박&gt;은 망각과 소유 사이에서 아슬아슬하게 흔들리는 인체의 실루엣을 탐구합니다. 
+                    </p>
+                    <p class="paragraph">
+                        화려한 장식을 전면 배제한 채, 오직 인체의 곡선을 왜곡하고 재정의하는 비대칭 재단과 생지 가죽의 날것 그대로의 텍스처를 통해 차갑고도 정적인 텐션을 선사합니다.
+                    </p>
+                </div>
+                
+                <div class="grid-cell left-border">
+                    <div class="section-header">The Artisan</div>
+                    <p class="paragraph">
+                        이번 컬렉션의 슈즈 라인은 성수동의 외진 지하 작업실에서 독자적인 세계를 구축해 온 비스포크 수제화 디자이너, <strong>최준(JUN CHOI)</strong>과의 독점 협업으로 완성되었습니다.
+                    </p>
+                    <p class="paragraph">
+                        그는 기계가 측정하는 수치를 부정합니다. 인간의 살결과 체온, 그리고 스타킹과 가죽이 맞닿을 때 발생하는 미세한 마찰음까지 계산하는 그의 병적인 완벽주의는 이번 &lt;OBLIVION&gt; 슈즈 라인에 고스란히 투영되었습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACCENT STATEMENT -->
+        <div class="quote-box">
+            <div class="quote-text">
+                “파리 런웨이 바닥은 존나게 미끄러워. 모델들이 걷다가 한 명이라도 발목이 꺾이면, 내 구두는 끝이야. 대충 겉모양만 흉내 낸 기성품으론 그 압박을 견딜 수 없어. 오직 살점 속으로 파고들 만큼 완벽하게 밀착되는 단 하나의 선(<span class="math">Strap</span>)만이 필요해.”
+            </div>
+            <div class="quote-author">— Jun Choi, at Atelier Lethe</div>
+        </div>
+
+        <!-- SPECIFICATIONS & DETAILS -->
+        <div class="grid-table" style="margin-top: 10mm;">
+            <div class="grid-row">
+                <div class="grid-cell">
+                    <div class="section-header">Technical Craft</div>
+                    <p class="paragraph">
+                        <strong>피부 반응형 수축 가죽 (Sensory Leather)</strong><br>
+                        착용자의 체온과 발목의 미세한 부기(붓기)에 반응하여 스스로 수축하는 최고급 풀그레인 레더를 사용하여, 신는 순간 살결의 일부가 된 듯한 압도적인 핏감을 구현했습니다.
+                    </p>
+                    <p class="paragraph">
+                        <strong>현장 타공 방식의 오차 제어</strong><br>
+                        백스테이지의 극단적인 시간 제약을 극복하기 위해, 내측에는 0.5초 만에 분리되는 초소형 히든 지퍼를 숨겨두었습니다. 외측 스트랩은 쇼 직전 모델의 발목 두께에 맞춰 현장에서 즉석으로 송곳 타공하여 완벽하게 구속합니다.
+                    </p>
+                </div>
+                
+                <div class="grid-cell left-border">
+                    <div class="section-header">Collection Info</div>
+                    <div class="spec-table">
+                        <div class="spec-row">
+                            <div class="spec-label">Project</div>
+                            <div class="spec-value">NOIR ÉTHER × JUN CHOI</div>
+                        </div>
+                        <div class="spec-row">
                             <div class="spec-label">Season</div>
                             <div class="spec-value">Autumn / Winter 2026-2027</div>
                         </div>
