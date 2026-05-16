@@ -1,296 +1,627 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>NOIR ÉTHER × JUN CHOI — OBLIVION</title>
-    <style>
-        @page {
-            size: A4;
-            margin: 15mm 12mm;
-            background-color: #0b0b0b;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIR ÉTHER × JUN CHOI — OBLIVION</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            background-color: #0b0b0b;
-            color: #e5e5e5;
-            font-family: 'Times New Roman', Times, 'Noto Serif KR', serif;
-            letter-spacing: 0.05em;
-            line-height: 1.6;
-            -webkit-print-color-adjust: exact;
-        }
+  :root {
+    --off-white: #f2f0ec;
+    --warm-black: #0d0c0b;
+    --stone: #9a9288;
+    --accent: #b8a898;
+    --rule: rgba(255,255,255,0.1);
+  }
 
-        /* Utility classes for typography */
-        .brand-title {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 24pt;
-            font-weight: 300;
-            letter-spacing: 0.3em;
-            text-align: center;
-            color: #ffffff;
-            text-transform: uppercase;
-        }
+  html { scroll-behavior: smooth; }
 
-        .collection-title {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 42pt;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-align: center;
-            color: #9e8a78; /* Muted antique gold/earth tone */
-            text-transform: uppercase;
-            margin-top: 5mm;
-        }
+  body {
+    background: var(--warm-black);
+    color: var(--off-white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.08em;
+    overflow-x: hidden;
+    cursor: none;
+  }
 
-        .subtitle {
-            font-size: 10pt;
-            letter-spacing: 0.4em;
-            text-align: center;
-            color: #888888;
-            text-transform: uppercase;
-            margin-top: 3mm;
-        }
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    background: var(--off-white);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor.expanded { width: 40px; height: 40px; opacity: 0.15; }
 
-        .divider {
-            width: 40mm;
-            height: 1px;
-            background-color: #444444;
-            margin: 12mm auto;
-        }
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10vw 8vw 8vw;
+    overflow: hidden;
+  }
 
-        /* Section layout */
-        .container {
-            width: 100%;
-            padding: 10mm 5mm;
-        }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 40%, rgba(184,168,152,0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 70%, rgba(255,255,255,0.02) 0%, transparent 60%);
+    pointer-events: none;
+  }
 
-        .header-section {
-            text-align: center;
-            margin-bottom: 15mm;
-            page-break-after: avoid;
-        }
+  /* Vertical rule — signature minimal gesture */
+  .hero-rule {
+    position: absolute;
+    left: 8vw;
+    top: 12vw;
+    width: 1px;
+    height: 0;
+    background: var(--accent);
+    opacity: 0.5;
+    animation: rule-grow 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  }
+  @keyframes rule-grow { to { height: 18vw; } }
 
-        .grid-table {
-            display: table;
-            width: 100%;
-            margin-bottom: 15mm;
-            border-collapse: collapse;
-        }
+  .hero-overline {
+    font-size: clamp(8px, 0.7vw, 10px);
+    letter-spacing: 0.35em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-bottom: 4vw;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fade-up 0.9s ease 0.8s forwards;
+  }
 
-        .grid-row {
-            display: table-row;
-        }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(52px, 10vw, 148px);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fade-up 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  }
 
-        .grid-cell {
-            display: table-cell;
-            width: 50%;
-            vertical-align: top;
-            padding: 0 8mm;
-        }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
 
-        .grid-cell.left-border {
-            border-left: 1px solid #2a2a2a;
-        }
+  .hero-subtitle-row {
+    margin-top: 4vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fade-up 0.9s ease 1s forwards;
+  }
 
-        .section-header {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 14pt;
-            font-weight: 400;
-            color: #ffffff;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 6mm;
-            page-break-after: avoid;
-        }
+  .hero-subtitle {
+    font-size: clamp(9px, 0.75vw, 11px);
+    letter-spacing: 0.3em;
+    color: var(--stone);
+    text-transform: uppercase;
+  }
 
-        .paragraph {
-            font-size: 10pt;
-            color: #b0b0b0;
-            text-align: justify;
-            margin-bottom: 5mm;
-        }
+  .hero-index {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(10px, 1vw, 14px);
+    letter-spacing: 0.2em;
+    color: rgba(154,146,136,0.5);
+  }
 
-        .paragraph.highlight {
-            color: #e5e5e5;
-            font-style: italic;
-        }
+  /* ─── HORIZONTAL RULE ─── */
+  .hr {
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    margin: 0;
+  }
 
-        /* Quote design */
-        .quote-box {
-            background-color: #121212;
-            border-left: 3px solid #9e8a78;
-            padding: 6mm 8mm;
-            margin: 10mm 0;
-            page-break-inside: avoid;
-        }
+  /* ─── SECTION WRAPPER ─── */
+  .section {
+    padding: 10vw 8vw;
+  }
 
-        .quote-text {
-            font-size: 10.5pt;
-            color: #dbdbdb;
-            font-style: italic;
-            line-height: 1.7;
-        }
+  .section-sm {
+    padding: 6vw 8vw;
+  }
 
-        .quote-author {
-            font-size: 9pt;
-            color: #888888;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-top: 3mm;
-            text-align: right;
-        }
+  /* ─── GRID ─── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+    align-items: start;
+  }
 
-        /* Info specifications block */
-        .spec-table {
-            display: table;
-            width: 100%;
-            margin-top: 8mm;
-            border-top: 1px solid #2a2a2a;
-        }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4vw;
+  }
 
-        .spec-row {
-            display: table-row;
-        }
+  /* ─── LABELS ─── */
+  .label {
+    font-size: clamp(8px, 0.65vw, 9px);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 4vw;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--stone);
+    flex-shrink: 0;
+  }
 
-        .spec-label {
-            display: table-cell;
-            width: 30%;
-            font-size: 9pt;
-            color: #777777;
-            padding: 3mm 0;
-            border-bottom: 1px solid #1a1a1a;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
+  /* ─── HEADINGS ─── */
+  .heading-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4.5vw, 64px);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: var(--off-white);
+  }
 
-        .spec-value {
-            display: table-cell;
-            width: 70%;
-            font-size: 9.5pt;
-            color: #cccccc;
-            padding: 3mm 0;
-            border-bottom: 1px solid #1a1a1a;
-        }
+  .heading-display em {
+    font-style: italic;
+    color: var(--accent);
+  }
 
-        .footer {
-            margin-top: 20mm;
-            text-align: center;
-            font-size: 8pt;
-            color: #555555;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            page-break-inside: avoid;
-        }
-        
-        .math {
-            font-family: 'Times New Roman', serif;
-            font-style: italic;
-            font-weight: bold;
-            color: #9e8a78;
-        }
-    </style>
+  .heading-sm {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(18px, 2.2vw, 30px);
+    line-height: 1.2;
+    color: var(--off-white);
+  }
+
+  /* ─── BODY TEXT ─── */
+  .body-text {
+    font-size: clamp(11px, 0.85vw, 13px);
+    line-height: 2;
+    color: rgba(242,240,236,0.55);
+    max-width: 420px;
+  }
+
+  .body-text + .body-text { margin-top: 1.5em; }
+
+  /* ─── PULL QUOTE ─── */
+  .pullquote {
+    border-left: 1px solid var(--accent);
+    padding: 0 0 0 3vw;
+    margin: 6vw 0;
+  }
+
+  .pullquote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 2.4vw, 34px);
+    line-height: 1.5;
+    color: var(--off-white);
+  }
+
+  .pullquote-attr {
+    margin-top: 1.5rem;
+    font-size: clamp(8px, 0.65vw, 9px);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  /* ─── CONCEPT SECTION — large asymmetric layout ─── */
+  .concept-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 8vw;
+    align-items: start;
+  }
+
+  .concept-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 1;
+    color: rgba(154,146,136,0.07);
+    letter-spacing: -0.03em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ─── SPEC TABLE ─── */
+  .spec-table {
+    width: 100%;
+    border-top: 1px solid var(--rule);
+  }
+
+  .spec-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--rule);
+    gap: 2rem;
+  }
+
+  .spec-key {
+    font-size: clamp(8px, 0.65vw, 9px);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .spec-val {
+    font-size: clamp(11px, 0.85vw, 13px);
+    color: rgba(242,240,236,0.75);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── CRAFT SECTION ─── */
+  .craft-item {
+    padding-top: 3vw;
+    border-top: 1px solid var(--rule);
+  }
+
+  .craft-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(11px, 1.1vw, 16px);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .craft-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(16px, 1.6vw, 22px);
+    color: var(--off-white);
+    line-height: 1.3;
+    margin-bottom: 1.2rem;
+  }
+
+  .craft-body {
+    font-size: clamp(10px, 0.78vw, 12px);
+    line-height: 2;
+    color: rgba(242,240,236,0.45);
+    max-width: 320px;
+  }
+
+  /* ─── ARTISAN SECTION ─── */
+  .artisan-layout {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 8vw;
+    align-items: start;
+  }
+
+  /* ─── FULL WIDTH STATEMENT ─── */
+  .statement {
+    padding: 12vw 8vw;
+    text-align: center;
+  }
+
+  .statement-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(24px, 4vw, 60px);
+    line-height: 1.3;
+    color: var(--off-white);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .statement-text strong {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  /* ─── NOISE TEXTURE overlay ─── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    padding: 4vw 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(12px, 1.2vw, 16px);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(242,240,236,0.3);
+  }
+
+  .footer-copy {
+    font-size: clamp(8px, 0.6vw, 9px);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(154,146,136,0.35);
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.22s; }
+  .reveal-delay-3 { transition-delay: 0.36s; }
+
+  /* ─── UTILITY ─── */
+  @keyframes fade-up {
+    to { opacity: 1; transform: none; }
+  }
+
+  .mt-sm { margin-top: 2vw; }
+  .mt-md { margin-top: 4vw; }
+  .mt-lg { margin-top: 6vw; }
+
+  /* Hover accent on spec rows */
+  .spec-row:hover .spec-val { color: var(--off-white); }
+  .spec-row { transition: all 0.2s ease; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .concept-layout, .artisan-layout {
+      grid-template-columns: 1fr;
+      gap: 10vw;
+    }
+    .concept-number { display: none; }
+    .hero-subtitle-row { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+    .footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .spec-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- HEADER -->
-        <div class="header-section">
-            <div class="brand-title">Noir Éther</div>
-            <div class="collection-title">Oblivion</div>
-            <div class="subtitle">Autumn / Winter 2026 Collaboration</div>
-        </div>
+<div class="cursor" id="cursor"></div>
 
-        <div class="divider"></div>
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-rule"></div>
 
-        <!-- MAIN CONCEPT -->
-        <div class="grid-table">
-            <div class="grid-row">
-                <div class="grid-cell">
-                    <div class="section-header">The Concept</div>
-                    <p class="paragraph highlight">
-                        “인간의 살결을 구속하는 가장 완벽한 형태의 아름다움, 그 강박적 이면.”
-                    </p>
-                    <p class="paragraph">
-                        하이엔드 아방가르드 하우스 <strong>NOIR ÉTHER</strong>가 2026 파리 패션위크에서 선보일 메인 컬렉션, &lt;OBLIVION: 강박&gt;은 망각과 소유 사이에서 아슬아슬하게 흔들리는 인체의 실루엣을 탐구합니다. 
-                    </p>
-                    <p class="paragraph">
-                        화려한 장식을 전면 배제한 채, 오직 인체의 곡선을 왜곡하고 재정의하는 비대칭 재단과 생지 가죽의 날것 그대로의 텍스처를 통해 차갑고도 정적인 텐션을 선사합니다.
-                    </p>
-                </div>
-                
-                <div class="grid-cell left-border">
-                    <div class="section-header">The Artisan</div>
-                    <p class="paragraph">
-                        이번 컬렉션의 슈즈 라인은 성수동의 외진 지하 작업실에서 독자적인 세계를 구축해 온 비스포크 수제화 디자이너, <strong>최준(JUN CHOI)</strong>과의 독점 협업으로 완성되었습니다.
-                    </p>
-                    <p class="paragraph">
-                        그는 기계가 측정하는 수치를 부정합니다. 인간의 살결과 체온, 그리고 스타킹과 가죽이 맞닿을 때 발생하는 미세한 마찰음까지 계산하는 그의 병적인 완벽주의는 이번 &lt;OBLIVION&gt; 슈즈 라인에 고스란히 투영되었습니다.
-                    </p>
-                </div>
-            </div>
-        </div>
+  <div class="hero-overline">Noir Éther × Jun Choi &nbsp;—&nbsp; Autumn/Winter 2026</div>
 
-        <!-- ACCENT STATEMENT -->
-        <div class="quote-box">
-            <div class="quote-text">
-                “파리 런웨이 바닥은 존나게 미끄러워. 모델들이 걷다가 한 명이라도 발목이 꺾이면, 내 구두는 끝이야. 대충 겉모양만 흉내 낸 기성품으론 그 압박을 견딜 수 없어. 오직 살점 속으로 파고들 만큼 완벽하게 밀착되는 단 하나의 선(<span class="math">Strap</span>)만이 필요해.”
-            </div>
-            <div class="quote-author">— Jun Choi, at Atelier Lethe</div>
-        </div>
+  <h1 class="hero-title">
+    Obli<em>vion</em>
+  </h1>
 
-        <!-- SPECIFICATIONS & DETAILS -->
-        <div class="grid-table" style="margin-top: 10mm;">
-            <div class="grid-row">
-                <div class="grid-cell">
-                    <div class="section-header">Technical Craft</div>
-                    <p class="paragraph">
-                        <strong>피부 반응형 수축 가죽 (Sensory Leather)</strong><br>
-                        착용자의 체온과 발목의 미세한 부기(붓기)에 반응하여 스스로 수축하는 최고급 풀그레인 레더를 사용하여, 신는 순간 살결의 일부가 된 듯한 압도적인 핏감을 구현했습니다.
-                    </p>
-                    <p class="paragraph">
-                        <strong>현장 타공 방식의 오차 제어</strong><br>
-                        백스테이지의 극단적인 시간 제약을 극복하기 위해, 내측에는 0.5초 만에 분리되는 초소형 히든 지퍼를 숨겨두었습니다. 외측 스트랩은 쇼 직전 모델의 발목 두께에 맞춰 현장에서 즉석으로 송곳 타공하여 완벽하게 구속합니다.
-                    </p>
-                </div>
-                
-                <div class="grid-cell left-border">
-                    <div class="section-header">Collection Info</div>
-                    <div class="spec-table">
-                        <div class="spec-row">
-                            <div class="spec-label">Project</div>
-                            <div class="spec-value">NOIR ÉTHER × JUN CHOI</div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-label">Season</div>
-                            <div class="spec-value">Autumn / Winter 2026-2027</div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-label">Location</div>
-                            <div class="spec-value">Paris Womenswear Fashion Week</div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-label">Main Venue</div>
-                            <div class="spec-value">Palais de Tokyo, Paris</div>
-                        </div>
-                        <div class="spec-row">
-                            <div class="spec-label">Footwear</div>
-                            <div class="spec-value">Atelier LETHE (Seoul, Bespoke)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="hero-subtitle-row">
+    <span class="hero-subtitle">Paris Womenswear Fashion Week &nbsp;·&nbsp; Palais de Tokyo</span>
+    <span class="hero-index">강박 / Obsession</span>
+  </div>
+</section>
 
-        <!-- FOOTER -->
-        <div class="footer">
-            © 2026 NOIR ÉTHER. ALL RIGHTS RESERVED. UNDERGROUND ARTISANSHIP.
-        </div>
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════ CONCEPT ═══════════════════════════════════ -->
+<section class="section">
+  <div class="concept-layout">
+    <div class="concept-number reveal">01</div>
+    <div>
+      <p class="label reveal">The Concept</p>
+      <h2 class="heading-display reveal reveal-delay-1">
+        망각과 소유 사이,<br>
+        <em>아슬아슬한</em> 실루엣
+      </h2>
+      <p class="body-text mt-md reveal reveal-delay-2">
+        화려한 장식을 전면 배제한 채, 오직 인체의 곡선을 왜곡하고 재정의하는 비대칭 재단과 생지 가죽의 날것 텍스처를 통해 냉정하고 정적인 텐션을 선사합니다.
+      </p>
+      <p class="body-text reveal reveal-delay-3">
+        인간의 살결을 구속하는 가장 완벽한 형태의 아름다움 — 그 강박적 이면. &lt;OBLIVION&gt;은 그 경계 위에 서 있습니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════ STATEMENT ═══════════════════════════════════ -->
+<section class="statement">
+  <p class="statement-text reveal">
+    "피부처럼 느껴지도록 오직 살점 속으로 파고들 만큼 완벽하게 밀착되는<br>
+    <strong>단 하나의 선</strong>만이 필요합니다."
+  </p>
+  <p class="footer-copy mt-md reveal reveal-delay-1">— Jun Choi, at Atelier Lethe, Seoul</p>
+</section>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════ ARTISAN ═══════════════════════════════════ -->
+<section class="section">
+  <div class="artisan-layout">
+    <div>
+      <p class="label reveal">The Artisan</p>
+      <h2 class="heading-display reveal reveal-delay-1">
+        Jun Choi<br>
+        <em>최준</em>
+      </h2>
+
+      <div class="pullquote reveal reveal-delay-2 mt-md">
+        <p class="pullquote-text">
+          "기계가 측정하는 수치를 부정합니다.<br>
+          인간의 살결과 체온, 그리고 가죽이 맞닿을 때 발생하는 미세한 마찰음까지 계산합니다."
+        </p>
+        <p class="pullquote-attr">— Jun Choi, Bespoke Shoemaker</p>
+      </div>
     </div>
 
+    <div class="mt-lg reveal">
+      <p class="body-text">
+        성수동의 외진 지하 작업실에서 독자적인 세계를 구축해 온 비스포크 수제화 디자이너. 그의 병적인 완벽주의는 이번 &lt;OBLIVION&gt; 슈즈 라인에 고스란히 투영되었습니다.
+      </p>
+
+      <div class="spec-table mt-md">
+        <div class="spec-row">
+          <span class="spec-key">Atelier</span>
+          <span class="spec-val">Atelier Lethe, 성수동, Seoul</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Discipline</span>
+          <span class="spec-val">Bespoke Handcrafted Footwear</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Collab</span>
+          <span class="spec-val">Exclusive — Noir Éther AW 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════ TECHNICAL CRAFT ═══════════════════════════════════ -->
+<section class="section-sm section">
+  <p class="label reveal">Technical Craft</p>
+  <div class="grid-3 mt-md">
+
+    <div class="craft-item reveal">
+      <p class="craft-num">— 01</p>
+      <h3 class="craft-title">Sensory Leather</h3>
+      <p class="craft-body">착용자의 체온과 발목의 미세한 부기에 반응하여 스스로 수축하는 최고급 풀그레인 레더. 신는 순간 살결의 일부가 됩니다.</p>
+    </div>
+
+    <div class="craft-item reveal reveal-delay-1">
+      <p class="craft-num">— 02</p>
+      <h3 class="craft-title">현장 타공 방식</h3>
+      <p class="craft-body">쇼 직전, 모델의 발목 두께에 맞춰 즉석으로 송곳 타공하여 완벽하게 구속합니다. 오차는 허용되지 않습니다.</p>
+    </div>
+
+    <div class="craft-item reveal reveal-delay-2">
+      <p class="craft-num">— 03</p>
+      <h3 class="craft-title">히든 지퍼 시스템</h3>
+      <p class="craft-body">백스테이지의 극단적인 시간 제약을 위해 설계된 0.5초 분리 초소형 히든 지퍼. 외측은 스트랩, 내측은 속도.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════ COLLECTION INFO ═══════════════════════════════════ -->
+<section class="section-sm section">
+  <div class="grid-2">
+    <div>
+      <p class="label reveal">Collection Info</p>
+      <div class="spec-table reveal reveal-delay-1">
+        <div class="spec-row">
+          <span class="spec-key">Project</span>
+          <span class="spec-val">Noir Éther × Jun Choi</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Season</span>
+          <span class="spec-val">Autumn / Winter 2026 — 2027</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Location</span>
+          <span class="spec-val">Paris Womenswear Fashion Week</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Venue</span>
+          <span class="spec-val">Palais de Tokyo, Paris</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Footwear</span>
+          <span class="spec-val">Atelier Lethe, Seoul</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Category</span>
+          <span class="spec-val">Exclusive Runway Footwear</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="label">The Concept in Brief</p>
+      <h3 class="heading-sm reveal-delay-1">강박 / <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--accent)">Obsession</em></h3>
+      <p class="body-text mt-sm">
+        망각(Oblivion)이라는 이름 아래, 이 컬렉션은 인간이 아름다움에 의해 소비되는 순간을 포착합니다. 장식은 없습니다. 오직 선, 압력, 그리고 살결만이 존재합니다.
+      </p>
+      <p class="body-text">
+        Palais de Tokyo의 차가운 콘크리트 바닥 위에서, 각 슈즈는 그 자체로 하나의 구속 장치입니다 — 아름다운.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
+<footer class="footer">
+  <span class="footer-brand">Noir Éther</span>
+  <span class="footer-copy">© 2026 Noir Éther. Underground Artisanship. All Rights Reserved.</span>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, .spec-row, .craft-item').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
